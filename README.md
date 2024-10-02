@@ -1,4 +1,5 @@
 Kafka Setup and CLI Commands
+
 This README provides the steps to create Kafka topics, start producer and consumer apps using the Kafka command-line interface (CLI), and use an HTTP endpoint for publishing messages.
 
 Prerequisites
@@ -20,26 +21,23 @@ kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --par
 2. Start Producer App (CLI)
 To start producing messages to the quickstart topic, run the following command:
 
-bash
-Copy code
 kafka-console-producer.sh --topic quickstart --bootstrap-server localhost:9092
+
 This command opens a terminal where you can input messages to be sent to the topic.
 
-3. Start Consumer App (CLI)
+4. Start Consumer App (CLI)
 To consume messages from the quickstart topic, run the following command:
 
-bash
-Copy code
 kafka-console-consumer.sh --topic quickstart --from-beginning --bootstrap-server localhost:9092
 This command reads and displays all messages from the beginning of the topic.
 
 4. Create Kafka Topic with Multiple Partitions
 To create another topic demo1 with 3 partitions, use the following command:
 
-bash
-Copy code
 kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 3 --topic demo1
-5. Start Producer App for demo1
+
+
+6. Start Producer App for demo1
 To start producing messages to the demo1 topic, run the following:
 
 
