@@ -7,6 +7,9 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import com.kafka.producer.dto.Customer;
+
+
 @Service
 public class ProducerService {
 
@@ -18,7 +21,7 @@ public class ProducerService {
 	public void sendmessagetoTopic(String  message) {
 
 		CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("producerconfig",message);
-		
+
 		future.whenComplete((result,ex)->{
 			if (ex == null) {
 				System.out.println("Sent message=[" + message +
@@ -28,7 +31,27 @@ public class ProducerService {
 						message + "] due to : " + ex.getMessage());
 			}
 		});
-
-
 	}
+
+
+	public void sendEventsToTopic(Customer customer) {
+		try {
+
+			CompletableFuture<SendResult<String, Object>> future = kafkaTemplate.send("customer", customer);
+			
+			future.whenComplete((result, ex) -> {
+				if (ex == null) {
+					System.out.println("Sent message=[" + customer.toString() +
+							"] with offset=[" + result.getRecordMetadata().offset() + "]");
+				} else {
+					System.out.println("Unable to send message=[" +
+							customer.toString() + "] due to : " + ex.getMessage());
+				}
+			});
+
+		} catch (Exception ex) {
+			System.out.println("ERROR : "+ ex.getMessage());
+		}
+	}
+
 }

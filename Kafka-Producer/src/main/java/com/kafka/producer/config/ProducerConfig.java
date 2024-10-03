@@ -9,6 +9,6 @@ public class ProducerConfig {
 
 	@Bean
     public NewTopic createTopic(){
-        return new NewTopic("producerconfig", 3, (short) 1);
+        return new NewTopic("customer", 3, (short) 1);
     }
 }
